@@ -14,20 +14,27 @@ ENV LOGSTASH_PATH /usr/local/logstash
 #log conf dir
 ENV LOGSTASH_CONF /usr/local/logstash/conf
 
-COPY logstash.tar.gz
+#COPY logstash.tar.gz ./
 
 RUN yum update -y \
 	&& yum install -y net-tools wget git java-1.8.0-openjdk
 
 
 RUN wget $LOGSTASH_URL -O logstash.tar.gz \
+#RUN ls \
 	&& mkdir -p $LOGSTASH_PATH \
 	&& tar xzf logstash.tar.gz -C $LOGSTASH_PATH --strip-components=1 \
 	&& rm logstash.tar.gz \
 	&& cd $LOGSTASH_PATH \
-	&& ln -s $LOGSTASH_PATH/bin/logstash /usr/local/bin \
+#	&& ln -s $LOGSTASH_PATH/bin/logstash /usr/local/bin \
 	&& git clone $LOGSTASH_GIT logstash_git \
 	&& mkdir -p $LOGSTASH_CONF \
-	&& cp logstash_git/conf/* $LOGSTASH_CONF
+	&& cp logstash_git/conf/* $LOGSTASH_CONF \
+	&& rm -rf logstash_git
 
-CMD logstash -f $LOGSTASH_CONF/*.conf ; /bin/bash ;
+
+#java home
+ENV JAVA_HOME /usr/lib/jvm/jre
+
+
+CMD $LOGSTASH_PATH/bin/logstash -f $LOGSTASH_CONF/*.conf ; /bin/bash ;
