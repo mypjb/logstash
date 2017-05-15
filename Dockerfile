@@ -6,7 +6,7 @@ MAINTAINER mypjb/fastdfs docker maintainer 280417314@qq.com
 ENV LOGSTASH_URL https://artifacts.elastic.co/downloads/logstash/logstash-5.4.0.tar.gz
 
 # log stash git
-ENV LOGSTASH_GIT https://github.com/mypjb/logstash.git
+ENV LOGSTASH_GIT https://github.com/mypjb/logstash-docker.git
 
 #log stash install dir
 ENV LOGSTASH_PATH /usr/local/logstash
@@ -36,5 +36,6 @@ RUN wget $LOGSTASH_URL -O logstash.tar.gz \
 #java home
 ENV JAVA_HOME /usr/lib/jvm/jre
 
+#EXPOSE 9600
 
 CMD $LOGSTASH_PATH/bin/logstash -f $LOGSTASH_CONF/*.conf ; /bin/bash ;
