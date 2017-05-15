@@ -1,6 +1,6 @@
 FROM centos
 
-MAINTAINER mypjb/fastdfs docker maintainer 280417314@qq.com
+MAINTAINER mypjb/logstash docker maintainer 280417314@qq.com
 
 # log stash download url
 ENV LOGSTASH_URL https://artifacts.elastic.co/downloads/logstash/logstash-5.4.0.tar.gz
